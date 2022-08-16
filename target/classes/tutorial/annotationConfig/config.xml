@@ -1,0 +1,38 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+       xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context = "http://www.springframework.org/schema/context"
+       xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+    <!-- component-scan -->
+    <!-- @Component ve alt tiplerini tarayıp bean oluşturur, annotation-config'i de içerir -->
+    <!-- base-package'a aralarında boşluk bırakarak birden fazla package verilebilir -->
+    <context:component-scan base-package="tutorial.annotationConfigs.autowiredComponent"/>
+    <!-- component-scan -->
+
+
+
+
+
+    <!-- property file -->
+<!--    <context:property-placeholder location="classpath:tutorial/annotationConfig/values.properties"/>-->
+    <!-- property file -->
+
+
+
+
+
+    <!-- annotation-config -->
+    <!-- @Autowired, @Required gibi annotationları tarar -->
+<!--    <context:annotation-config/>-->
+<!--    -->
+<!--    <bean id="beanA" class="tutorial.annotationConfigs.autowiredComponent.BeanA"/>-->
+<!--    <bean id="beanB" class="tutorial.annotationConfigs.autowiredComponent.BeanB"/>-->
+<!--    <bean id="beanC" class="tutorial.annotationConfigs.autowiredComponent.BeanB1"/>-->
+    <!-- annotation-config -->
+</beans>

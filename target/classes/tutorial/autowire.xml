@@ -1,0 +1,13 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- autowire ile injection işlemleri otomatik yapılabilir -->
+    <bean id="beanA" autowire="constructor" class="tutorial.xmlConfigs.BeanA"/> <!-- constructorların argümanlarının tiplerine bakar -->
+    <bean id="beanA2" autowire="byType" class="tutorial.xmlConfigs.BeanA"/> <!-- setter methodlarının argümanlarının tiplerine bakar -->
+    <bean id="beanA3" autowire="byName" class="tutorial.xmlConfigs.BeanA"/> <!-- setter methodlarının isimlerine bakar -->
+
+    <bean id="beanB" class="tutorial.xmlConfigs.BeanB"/>
+
+</beans>

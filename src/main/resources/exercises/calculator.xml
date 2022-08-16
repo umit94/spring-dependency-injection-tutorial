@@ -1,0 +1,21 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="calculator" class="exercises.xml.collectionExercise.Calculator">
+        <property name="functions">
+            <map>
+                <entry key="cos">
+                    <bean class="exercises.xml.collectionExercise.function.Cos"/>
+                </entry>
+                <entry key="sin">
+                    <bean class="exercises.xml.collectionExercise.function.Sin"/>
+                </entry>
+                <entry key="log">
+                    <bean class="exercises.xml.collectionExercise.function.Log"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+</beans>

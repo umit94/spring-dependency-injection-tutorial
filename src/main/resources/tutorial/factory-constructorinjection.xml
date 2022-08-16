@@ -1,0 +1,32 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="beanB" class="tutorial.xmlConfigs.BeanB"/>
+
+
+    <!-- Factory -->
+    <!-- beani oluşturulacak factory bean oluşturulur -->
+    <bean id="beanAFactory" class="tutorial.xmlConfigs.BeanAFactory"/>
+
+    <!-- factory-bean'a bu beani oluşturacak bean geçilir ve factory-method'a factory-bean içerisinde oluşturulmak istenen beani döndüren method geçilir -->
+    <bean id="beanAByFactory" factory-bean="beanAFactory" factory-method="createBean">
+
+        <!-- constructor-arg ile factory-method'una geçilmesi gereken argüman isimleri, referans(veya değerler) vs. geçilir -->
+        <constructor-arg name="beanB" ref="beanB"/> <!-- name, index, type gibi attributeler ile hangi parametreye geçileceğini belirtebiliriz -->
+        <constructor-arg name="secondArg" value="3"/>
+    </bean>
+    <!-- Factory -->
+
+
+
+
+    <!-- Static -->
+    <!-- factory classı yazmadan nesnesi oluşturulmak istenilen class üzerindeki static methodlar ile bean oluşturulabilir -->
+    <bean id="beanAByStatic" factory-method="createBean" class="tutorial.xmlConfigs.BeanA">
+        <!--        <property name="beanB" ref="beanB"/>-->
+        <constructor-arg name="beanB" ref="beanB"/>
+    </bean>
+    <!-- Static -->
+</beans>

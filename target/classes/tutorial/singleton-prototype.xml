@@ -1,0 +1,14 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- singleton beanler bir kere oluşturulur ve tekrar oluşturulmak istendiğinde aynı instance döndürülür
+         singleton beanler, eğer lazy-init="true" değil ise ApplicationContext nesnesi oluşturulduğunda oluşturulurlar -->
+    <bean id="singletonBean" class="tutorial.xmlConfigs.BeanA"> <!-- singleton -->
+        <property name="beanB" ref="prototypeBean"/>
+    </bean>
+
+    <!-- prototype beanler, hiçbir şekilde ApplicationContext nesnesi oluşturulurken oluşturulmazlar. Her yeni nesne oluşturulmak istendiğinde farklı instance döndürür -->
+    <bean id="prototypeBean" scope="prototype" class="tutorial.xmlConfigs.BeanB"/> <!-- prototype -->
+</beans>

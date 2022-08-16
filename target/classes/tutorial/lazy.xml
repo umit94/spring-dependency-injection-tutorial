@@ -1,0 +1,36 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" > <!-- default-lazy-init="true" geçilerek içindeki tüm beanler lazy yapılabilir-->
+
+
+
+    <!-- lazy-init -->
+    <!-- lazy-init, ApplicationContext nesnesi oluşturulurken bean nesnelerinin oluşturulmamasını sağlar. Aynı şekilde scope="prototype" da aynı işlevi görür. İlgili açıklamalar singleton-prototype.xml'de -->
+    <bean id="lazyBeanA" class="tutorial.xmlConfigs.BeanA" lazy-init="true">
+        <property name="beanB" ref="lazyBeanB"/>
+    </bean>
+
+    <bean id="lazyBeanB" class="tutorial.xmlConfigs.BeanB" lazy-init="true"/>
+    <bean id="lazyBeanB2" class="tutorial.xmlConfigs.BeanB" lazy-init="true"/>
+
+    <bean id="lazyBeanA2" class="tutorial.xmlConfigs.BeanA" lazy-init="true">
+        <property name="beanB" ref="beanB"/>
+    </bean>
+
+    <bean id="beanB" class="com.example.demo.beanB" lazy-init="true"/>
+    <!-- lazy-init -->
+
+
+    <!-- eager-init -->
+    <bean id="eagerBeanA" class="tutorial.xmlConfigs.BeanA"> <!-- beanA eager(lazy olmayan) ise ve dependency'si lazy ise dependency de eager gibi davranır -->
+        <property name="beanB" ref="lazyBeanB2"/>
+    </bean>
+    <!-- eager-init -->
+
+
+    <beans default-lazy-init="true"> <!-- default olarak içerisindeki tüm beanlar lazy yapılabilir -->
+
+    </beans>
+
+</beans>

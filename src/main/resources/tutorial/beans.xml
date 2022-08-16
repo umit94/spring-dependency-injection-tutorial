@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--    bean id, aynı beans içerisinde unique olmalıdır. farklı bir beans içerisinde aynı id ile yeni bean oluşturulursa eski bean override edilir-->
+    <!-- Daha önce kullanılan bir name'i id olarak kullanırsak o bean override edilmez?? -->
+    <bean id="beanA" class="tutorial.xmlConfigs.BeanA" name="BEANA BEAN_A BeanA"><!--  id bir tane olmalı, name birden fazla olabilir. nokta, boşluk veya noktalı virgül ile ayrılabilir  -->
+
+
+        <!-- property ile instance variablelar için nesne oluşturup set methodları ile atama yapabiliriz.
+         ref config dosyasında tanımladığımız bir id'yi veya name'i göstermelidir. name, hangi set methodu çağırılacağını belirler
+         örneğin name="myVar" ise setMyVar methodu çağırılır, yani name, instance variable'ın ismiyle direkt bağlantılı değildir -->
+        <property name="beanB" ref="beanB"/> <!-- setBeanB methodu çağırılırken beanB id'sine veya name'ine sahip beanden bir nesne oluşturup bu methoda parametre olarak geçer -->
+
+
+        <property name="primitiveType" value="3"/> <!-- direkt value ile değer geçilebilir -->
+    </bean>
+
+    <!-- alias, bean'e daha sonradan name eklemek için kullanılır. Erişimimizin olmadığı bir config olduğu zaman yeni name vermek için kullanılabilir -->
+    <alias name="beanA" alias="aliasA"/>
+
+    <bean id="beanB" class="tutorial.xmlConfigs.BeanB"/>
+
+    <bean class="tutorial.xmlConfigs.BeanB"/> <!-- id veya name verilmesine gerek yoktur, fully qualified name ile çağırılabilir -->
+
+
+
+    <bean id="BeanA3" class="tutorial.xmlConfigs.BeanA">
+        <property name="beanB">
+            <bean class="tutorial.xmlConfigs.BeanB"/> <!-- inner bean ile burada da bean oluşturabiliriz -->
+        </property>
+    </bean>
+
+
+
+    <!-- abstract -->
+    <bean id="abstractClass" abstract="true" class="tutorial.xmlConfigs.BeanA"/> <!-- constructor çağırısı yapılamaz -->
+    <!-- abstract -->
+
+
+
+
+
+    <!-- parent -->
+    <!-- parent ile xml içerisinde verilen id'e sahip bean'in propertyleri extend edilebilir, farklı classlara sahip gerçekte birbiriyle parent child ilişkisi
+     olmayan classlar kullanılabilir, çünkü burada sadece propertyler devralınır, class verilmez ise class da devralınır-->
+    <bean id="child" parent="beanA">
+        <property name="primitiveType" value="4"/> <!-- propertyler override edilebilirler -->
+    </bean>
+    <!-- parent -->
+
+
+
+
+
+    <!-- override -->
+    <bean id="beanOverrideTest" name="BEANO" class="tutorial.xmlConfigs.BeanA"/>
+
+    <beans> <!-- beans içerisinde başka bir beans oluşturulabilir ancak beans sonrasında beans harici başka element kullanamayız  -->
+
+        <!-- id ile override ettiğimizde name ile yapılan çağırılar da override edilmiş olur yani BEANO ile çağırdığımızda da BeanB nesnesi gelir -->
+        <bean id="beanOverrideTest" class="tutorial.xmlConfigs.BeanB"/> <!-- beanOverrideTest, override edilir ve BeanB nesnesi döndürür -->
+
+        <bean id="aliasA" class="tutorial.xmlConfigs.BeanB"/>
+    </beans>
+    <!-- override -->
+
+
+
+<!--    <alias name="" alias=""/> beans'den sonra yazıldığı için hata döndürür -->
+    <beans></beans> <!-- beans sonrasında başka bir beans yazılabilir -->
+</beans>
+
